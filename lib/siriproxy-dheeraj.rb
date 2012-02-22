@@ -51,16 +51,12 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
   end
   
   listen_for /i just bought gas/i, within_state: :dheeraj_state do
-    response = ask "This trip cost 28 dollars. Should i add this to joe's next invoice"
-    if(response =~/yes/i)
-      say "Ok i'll add it to his next invoice"
-    else
-      say ""
-    end
+    say "ok i'll add it to joe's account"
+    
   end
   
   listen_for /i am at joe\'s/i, within_state: :dheeraj_state do
-    response = ask ""
+    response = ask "This trip cost 28 dollars. Should i add this to joe's next invoice"
     if(response =~/yes/i)
       say "Ok i'll bill it"
     else
