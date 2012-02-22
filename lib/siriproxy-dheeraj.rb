@@ -28,11 +28,16 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
   end 
 
   listen_for /test siri proxy/i do
+    set_state :dheeraj_state
     say "Siri Proxy is down and running!" #say something to the user!
     
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
-  
+  listen_for /Do you have tea/i, within_state: :dheeraj_state do
+    say "I am doing great"
+    
+    request_completed
+  end
   #Demonstrate that you can have Siri say one thing and write another"!
   listen_for /you don't say/i do
     say "Sometimes I don't write what I say", spoken: "Sometimes I don't say what I write"
