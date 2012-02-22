@@ -40,7 +40,7 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
   
-  listen_for /Where am i/i do
+  listen_for /How much is the toll/i do
     response = ask "You are on the golden gate bridge. The toll is 6 dollars. Would you like me to bill it to joe"
     if(response =~/yes/i)
       say "Ok i'll bill it"
