@@ -27,17 +27,47 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
     #    modifications made to it)
   end 
 
-  listen_for /test siri proxy/i do
+  listen_for /Where do i have to be right now/i do
     set_state :dheeraj_state
-    say "Siri Proxy is down and running!" #say something to the user!
-    
+    response = ask "You have an appointment in 15 minutes with joe. Based on traffic it'll take you 10 minutes to get there. Do you want me to track your mileage?"
+    if(response =~ /yes/i) #process their response
+      response1 = ask "would you like me to bill it to joe?"
+      if(response1 =~ /yes/i)
+        say "Ok i'll track it"
+      end
+    else
+      say "You could have just said 'yes'!"
+    end
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
-  listen_for /Do you have tea/i, within_state: :dheeraj_state do
-    say "I am doing great"
-    
-    request_completed
+  
+  listen_for /Where am i/i, within_state: :dheeraj_state do
+    response = ask "You are on the golden gate bridge. The toll is 6 dollars. Would you like me to bill it to joe"
+    if(response =~/yes/i)
+      say "Ok i'll bill it"
+    else
+      say ""
+    end
   end
+  
+  listen_for /i just bought gas/i, within_state: :dheeraj_state do
+    response = ask "This trip cost 28 dollars. Should i add this to joe's next invoice"
+    if(response =~/yes/i)
+      say "Ok i'll add it to his next invoice"
+    else
+      say ""
+    end
+  end
+  
+  listen_for /i am at joe\'s/i, within_state: :dheeraj_state do
+    response = ask ""
+    if(response =~/yes/i)
+      say "Ok i'll bill it"
+    else
+      say ""
+    end
+  end
+  
   #Demonstrate that you can have Siri say one thing and write another"!
   listen_for /you don't say/i do
     say "Sometimes I don't write what I say", spoken: "Sometimes I don't say what I write"
