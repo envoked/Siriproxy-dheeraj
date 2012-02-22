@@ -28,7 +28,7 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
   end 
 
   listen_for /test siri proxy/i do
-    say "Siri Proxy is up and running!" #say something to the user!
+    say "Siri Proxy is down and running!" #say something to the user!
     
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
@@ -42,7 +42,7 @@ class SiriProxy::Plugin::Dheeraj < SiriProxy::Plugin
   listen_for /siri proxy test state/i do
     set_state :some_state #set a state... this is useful when you want to change how you respond after certain conditions are met!
     say "I set the state, try saying 'confirm state change'"
-    
+     
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
   
